@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row pagination-centered">
+    <div class="col-lg-12 ">
+
+      <div  class="col-lg-6  offset-md-3">
+
+        <section>
+            
+          <form class="form-horizontal" (ngSubmit)="search()">
+            <h5 class="text-center">Flight Search</h5>
+            <div *ngIf="error" class="alert alert-danger">
+                {{errorMessage}}
+              </div>
+            <div class="form-group">
+              <div class="col-sm-10">
+                <input type="text" [disabled]="origin !== ''" [(ngModel)]="flightNumber" class="form-control" name="flightNumber" placeholder="Enter flightNumber">
+              </div>
+            </div>
+          
+            <div class="form-inline">
+              <div class="col-sm-5"> 
+                <input [disabled]="flightNumber !== ''" type="text" [(ngModel)]="origin" name="origin" class="form-control" placeholder="Enter Origin">
+              </div>
+              <div class="col-sm-5"> 
+                  <input [disabled]="flightNumber !==''" type="text" [(ngModel)]="destination" name="destination"  class="form-control"  placeholder="Enter Destination">
+                </div>
+            </div>
+         
+            <div class="form-group">
+                
+              </div>
+
+              <div class="form-group">
+                  <div class="col-sm-10"> 
+                    <input type="date" name="date" class="form-control" [(ngModel)]="date" placeholder="Enter Date">
+                  </div>
+                </div>
+
+            <div class="form-group"> 
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+
+        </section>
+
+      </div>
+
+        <section>
+        <div id="search-component"  class="col-lg-11 text-center offset-md-1">
+
+
+          <table mdbTable bordered="true" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Flight Number</th>
+                <th>Carrier</th>
+                <th>Origin</th>
+                <th>Departure</th>
+                <th>Destination</th>
+                <th>Arrival</th>
+                <th>Air Craft</th>
+                <th>Distance</th>
+                <th>Travel Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr mdbTableCol *ngFor="let flight of flights| async">
+                <th scope="row">{{flight.flightNumber}}</th>
+                <td>{{flight.carrier}}</td>
+                <td>{{flight.origin}}</td>
+                <td>{{flight.departure}}</td>
+                <td>{{flight.destination}}</td>
+                <td>{{flight.arrival}}</td>
+                <td>{{flight.aircraft}}</td>
+                <td>{{flight.distance}}</td>
+                <td>{{flight.travelTime}}</td>
+                <td>{{flight.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </section>
+    </div>
+  </div>
+</div>
